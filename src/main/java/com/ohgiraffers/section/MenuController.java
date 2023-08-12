@@ -68,7 +68,7 @@ public class MenuController {
 
         int result = list.size();
 
-        if (list != null && result > 0) {
+        if (result > 0) {
             printResult.printSuccessMessage("randomPick");
         } else {
             printResult.printErrorMessage("randomPick");
