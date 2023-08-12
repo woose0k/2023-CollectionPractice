@@ -57,7 +57,7 @@
          WHERE POKEMON_NAME LIKE '%' || #{ name } || '%'
     </select>
 
-    <select id="bringRandomThreePokemon" resultMap="pokeBoxResultMap" parameterType="hashmap">
+    <select id="bringRandomPokemon" resultMap="pokeBoxResultMap" parameterType="hashmap">
         SELECT
                POKEMON_NO
              , POKEMON_NAME
