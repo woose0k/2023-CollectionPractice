@@ -1,18 +1,17 @@
-package com.ohgiraffers.section;
+package com.ohgiraffers.common;
 
 public class CategoryDTO {
 
     private int typeCode;
     private String typeName;
-    private int refCode;
 
     public CategoryDTO() {
     }
 
-    public CategoryDTO(int typeCode, String typeName, int refCode) {
+    public CategoryDTO(int typeCode, String typeName) {
         this.typeCode = typeCode;
         this.typeName = typeName;
-        this.refCode = refCode;
+
     }
 
     public int getTypeCode() {
@@ -31,20 +30,11 @@ public class CategoryDTO {
         this.typeName = typeName;
     }
 
-    public int getRefCode() {
-        return refCode;
-    }
-
-    public void setRefCode(int refCode) {
-        this.refCode = refCode;
-    }
-
     @Override
     public String toString() {
         return "CategoryDTO{" +
                 "typeCode=" + typeCode +
                 ", typeName='" + typeName + '\'' +
-                ", refCode=" + refCode +
                 '}';
     }
 }

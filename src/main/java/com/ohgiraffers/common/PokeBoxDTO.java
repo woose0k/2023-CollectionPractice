@@ -1,4 +1,4 @@
-package com.ohgiraffers.section;
+package com.ohgiraffers.common;
 
 public class PokeBoxDTO {
 

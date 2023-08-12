@@ -1,61 +1,52 @@
 package com.ohgiraffers.common;
 
-public class PokeBoxAndCategoryDTO {
+import java.util.List;
 
-    private int no;
-    private String name;
-    private CategoryDTO category;
-    private String evolveable;
+public class CategoryAndPokeBoxDTO {
 
-    public PokeBoxAndCategoryDTO() {
+    private int typeCode;
+    private String typeName;
+    private List<PokeBoxDTO> pokeBoxList;
+
+    public CategoryAndPokeBoxDTO() {
     }
 
-    public PokeBoxAndCategoryDTO(int no, String name, CategoryDTO category, String evolveable) {
-        this.no = no;
-        this.name = name;
-        this.category = category;
-        this.evolveable = evolveable;
+    public CategoryAndPokeBoxDTO(int typeCode, String typeName, List<PokeBoxDTO> pokeBoxList) {
+        this.typeCode = typeCode;
+        this.typeName = typeName;
+        this.pokeBoxList = pokeBoxList;
     }
 
-    public int getNo() {
-        return no;
+    public int getTypeCode() {
+        return typeCode;
     }
 
-    public void setNo(int no) {
-        this.no = no;
+    public void setTypeCode(int typeCode) {
+        this.typeCode = typeCode;
     }
 
-    public String getName() {
-        return name;
+    public String getTypeName() {
+        return typeName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setTypeName(String typeName) {
+        this.typeName = typeName;
     }
 
-    public CategoryDTO getCategory() {
-        return category;
+    public List<PokeBoxDTO> getPokeBoxList() {
+        return pokeBoxList;
     }
 
-    public void setCategory(CategoryDTO category) {
-        this.category = category;
-    }
-
-    public String getEvolveable() {
-        return evolveable;
-    }
-
-    public void setEvolveable(String evolveable) {
-        this.evolveable = evolveable;
+    public void setPokeBoxList(List<PokeBoxDTO> pokeBoxList) {
+        this.pokeBoxList = pokeBoxList;
     }
 
     @Override
     public String toString() {
-        return "MenuAndCategoryDTO{" +
-                "no=" + no +
-                ", name='" + name + '\'' +
-                ", category=" + category +
-                ", evolveable='" + evolveable + '\'' +
+        return "CategoryAndPokeBoxDTO{" +
+                "typeCode=" + typeCode +
+                ", typeName='" + typeName + '\'' +
+                ", pokeBoxList=" + pokeBoxList +
                 '}';
     }
 }

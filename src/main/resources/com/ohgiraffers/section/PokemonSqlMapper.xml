@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.ohgiraffers.section.PokemonSqlMapper">
+
+    <resultMap id="pokeBoxResultMap" type="PokeBoxDTO">
+        <id property="no" column="POKEMON_NO"/>
+        <result property="name" column="POKEMON_NAME"/>
+        <result property="typeCode" column="TYPE_CODE"/>
+        <result property="evolveableStatus" column="EVOLVEABLE_STATUS"/>
+    </resultMap>
+
+    <select id="selectAllPokemon" resultMap="pokeBoxResultMap">
+        SELECT
+               POKEMON_NO
+             , POKEMON_NAME
+             , TYPE_CODE
+             , EVOLVEABLE_STATUS
+          FROM TBL_POKEBOX
+         ORDER BY POKEMON_NO
+    </select>
+
+    <resultMap id="CategoryAndPokeBoxMap" type="com.ohgiraffers.common.CategoryAndPokeBoxDTO">
+        <id property="typeCode" column="TYPE_CODE"/>
+        <result property="typeName" column="TYPE_NAME"/>
+        <collection property="pokeBoxList" ofType="PokeBoxDTO">
+            <id property="no" column="POKEMON_NO"/>
+            <result property="name" column="POKEMON_NAME"/>
+            <result property="typeCode" column="TYPE_CODE"/>
+            <result property="evolveableStatus" column="EVOLVEABLE_STATUS"/>
+        </collection>
+    </resultMap>
+
+
+    <select id="searchListByTypeName" resultMap="CategoryAndPokeBoxMap" parameterType="string">
+    SELECT
+           A.TYPE_CODE
+         , A.TYPE_NAME
+         , B.POKEMON_NO
+         , B.POKEMON_NAME
+         , B.TYPE_CODE
+         , B.EVOLVEABLE_STATUS
+      FROM TBL_CATEGORY A
+      LEFT JOIN TBL_POKEBOX B ON (A.TYPE_CODE = B.TYPE_CODE)
+     WHERE A.TYPE_NAME = #{ type }
+    </select>
+
+    <select id="searchPokemonByName" resultMap="pokeBoxResultMap" parameterType="string">
+        SELECT
+               POKEMON_NO
+             , POKEMON_NAME
+             , TYPE_CODE
+             , EVOLVEABLE_STATUS
+          FROM TBL_POKEBOX
+         WHERE POKEMON_NAME LIKE '%' || #{ name } || '%'
+    </select>
+
+    <select id="bringRandomThreePokemon" resultMap="pokeBoxResultMap" parameterType="hashmap">
+        SELECT
+               POKEMON_NO
+             , POKEMON_NAME
+             , TYPE_CODE
+             , EVOLVEABLE_STATUS
+          FROM TBL_POKEBOX
+         WHERE POKEMON_NO IN
+        <foreach collection="randomPokemon" item="pokemonNo" open="(" separator="," close=")">
+            #{ pokemonNo }
+        </foreach>
+    </select>
+
+    <insert id="registNewPokemon" parameterType="PokeBoxDTO">
+        INSERT
+          INTO TBL_POKEBOX
+        (
+          POKEMON_NO
+        , POKEMON_NAME
+        , TYPE_CODE
+        , EVOLVEABLE_STATUS
+        )
+        VALUES
+        (
+          SEQ_POKEMON_NO.NEXTVAL
+        , #{ name }
+        , #{ typeCode }
+        , #{ evolveableStatus }
+        )
+    </insert>
+
+    <update id="modifyPokemon" parameterType="PokeBoxDTO">
+        UPDATE
+               TBL_POKEBOX
+        <set>
+            <if test="name != null and name != ''">
+                POKEMON_NAME = #{ name }
+            </if>
+            <if test="typeCode != null and typeCode > 0">
+                , TYPE_CODE = #{ typeCode }
+            </if>
+            <if test="evolveableStatus != null and evolveableStatus != ''">
+                , EVOLVEABLE_STATUS = #{ evolveableStatus }
+            </if>
+        </set>
+         WHERE POKEMON_NO = #{ no }
+    </update>
+
+    <delete id="transferPokemon" parameterType="PokeBoxDTO">
+        DELETE
+          FROM TBL_POKEBOX
+         WHERE POKEMON_NO = #{ no }
+    </delete>
+
+</mapper>
