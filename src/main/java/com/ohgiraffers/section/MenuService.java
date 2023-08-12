@@ -54,13 +54,13 @@ public class MenuService {
         return pokeBoxList;
     }
 
-    public List<PokeBoxDTO> bringRandomThreePokemon(Map<String, List<Integer>> random) {
+    public List<PokeBoxDTO> bringRandomPokemon(Map<String, List<Integer>> random) {
 
         SqlSession sqlSession = getSqlSession();
 
         mapper = sqlSession.getMapper(PokemonSqlMapper.class);
 
-        List<PokeBoxDTO> pokeBoxList = mapper.bringRandomThreePokemon(random);
+        List<PokeBoxDTO> pokeBoxList = mapper.bringRandomPokemon(random);
         pokeBoxList.forEach(System.out::println);
 
         sqlSession.close();

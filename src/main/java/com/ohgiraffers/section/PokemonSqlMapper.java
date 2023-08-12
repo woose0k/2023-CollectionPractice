@@ -20,5 +20,5 @@ public interface PokemonSqlMapper {
 
     List<PokeBoxDTO> searchPokemonByName(String name);
 
-    List<PokeBoxDTO> bringRandomThreePokemon(Map<String, List<Integer>> random);
+    List<PokeBoxDTO> bringRandomPokemon(Map<String, List<Integer>> random);
 }

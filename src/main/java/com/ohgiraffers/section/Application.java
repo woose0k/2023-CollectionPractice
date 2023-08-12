@@ -47,7 +47,7 @@ public class Application {
             switch (no) {
                 case 1 : menuController.searchListByTypeName(inputTypeName()); break;
                 case 2 : menuController.searchPokemonByName(inputName()); break;
-                case 3 : menuController.bringRandomThreePokemon(randomPokemonList()); break;
+                case 3 : menuController.bringRandomPokemon(randomPokemonList()); break;
                 case 9 : return;
             }
 

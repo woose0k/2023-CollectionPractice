@@ -60,11 +60,11 @@ public class MenuController {
 
 
 
-    public void bringRandomThreePokemon(List<Integer> randomPokemon) {
+    public void bringRandomPokemon(List<Integer> randomPokemon) {
 
         Map<String, List<Integer>> random = new HashMap<>();
         random.put("randomPokemon", randomPokemon);
-        List<PokeBoxDTO> list = menuService.bringRandomThreePokemon(random);
+        List<PokeBoxDTO> list = menuService.bringRandomPokemon(random);
 
         int result = list.size();
 
